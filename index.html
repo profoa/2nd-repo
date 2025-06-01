@@ -21,6 +21,7 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
+      position: relative;
     }
 
     .container {
@@ -56,12 +57,67 @@
         text-shadow: 0 0 20px #7873f5, 0 0 30px #7873f5;
       }
     }
+
+    .heart {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: red;
+      transform: rotate(45deg);
+      animation: pop 0.8s ease-out forwards;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -12px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -12px;
+      top: 0;
+    }
+
+    @keyframes pop {
+      0% {
+        opacity: 0;
+        transform: scale(0) rotate(45deg);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) rotate(45deg);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 class="glow">Hello Everyone!</h1>
-    <p>This is Aditya's first website😎🫣</p>
+    <h1 class="glow">Mast & Creative</h1>
+    <p>Bold ideas. Beautiful design. Limitless imagination.</p>
   </div>
+
+  <script>
+    document.body.addEventListener('click', function (e) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${e.clientX - 12}px`;
+      heart.style.top = `${e.clientY - 12}px`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 800);
+    });
+  </script>
 </body>
 </html>
